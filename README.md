@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Magie — Formulário de inscrição (Conversations)
 
-## Getting Started
+Formulário de captação de leads da Magie. Coleta **nome, telefone, empresa e email**,
+valida os dados em tempo real, formata o telefone automaticamente no padrão
+`(XX) XXXXX-XXXX` e grava cada inscrição em uma planilha do Google Sheets.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router) + **TypeScript**
+- **Tailwind CSS v4** (visual glassmorphism)
+- **React Hook Form** + **Zod** (validação)
+- **Google Apps Script Web App** (gravação no Google Sheets)
+- Deploy na **Vercel**
+
+## Estrutura
+
+```
+src/
+  app/
+    api/subscribe/route.ts   # Recebe o submit, valida e repassa ao Apps Script
+    layout.tsx               # Fontes (Figtree + Montserrat) e metadata
+    page.tsx                 # Card glassmorphism
+    globals.css              # Tema, gradiente de fundo
+  components/
+    SignupForm.tsx           # Formulário + estados (form/confirmação)
+    Field.tsx                # Input com label flutuante e erro
+    Logo.tsx                 # Logo (placeholder — troque pelo SVG oficial)
+  lib/
+    schema.ts                # Schema Zod de validação
+    phone.ts                 # Máscara/normalização do telefone
+google-apps-script/Code.gs   # Script para colar na sua planilha
+public/assets/               # Logos, background e vetores exportados
+```
+
+## Configuração
+
+### 1. Instalar dependências
+
+```bash
+npm install
+```
+
+### 2. Conectar ao Google Sheets (Apps Script)
+
+1. Abra a sua planilha no Google Sheets.
+2. Vá em **Extensões → Apps Script**.
+3. Apague o conteúdo e cole o arquivo [`google-apps-script/Code.gs`](google-apps-script/Code.gs).
+4. Clique em **Implantar → Nova implantação**.
+5. Tipo **App da Web**, executar como **Eu**, acesso **Qualquer pessoa**.
+6. Copie a URL gerada (termina em `/exec`).
+
+### 3. Variável de ambiente
+
+Crie `.env.local` (ou configure na Vercel):
+
+```
+GOOGLE_SHEETS_WEBHOOK_URL="https://script.google.com/macros/s/XXXX/exec"
+```
+
+### 4. Rodar localmente
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy na Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm i -g vercel       # se ainda não tiver
+vercel                # primeiro deploy / link do projeto
+```
 
-## Learn More
+No painel da Vercel, em **Settings → Environment Variables**, adicione
+`GOOGLE_SHEETS_WEBHOOK_URL` com a URL do Apps Script. Depois:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+vercel --prod
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Personalização
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Assets**: coloque os arquivos exportados em `public/assets/` e siga
+  [`public/assets/README.md`](public/assets/README.md) para plugar logo e background.
+- **Fontes**: Figtree (título/subtítulo) e Montserrat (inputs/botões) são carregadas
+  via `next/font/google` em `src/app/layout.tsx`.
+- **Data do evento**: o texto "3 de junho" da tela de confirmação está em
+  `src/components/SignupForm.tsx`.
+- **Regras de validação**: ajuste em `src/lib/schema.ts`.
 
-## Deploy on Vercel
+## Validações aplicadas
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Campo    | Regra |
+|----------|-------|
+| Nome     | Nome e sobrenome (mín. 2 palavras, apenas letras) |
+| Telefone | Celular BR com DDD — 11 dígitos, máscara `(XX) XXXXX-XXXX` |
+| Empresa  | Mín. 2 caracteres |
+| Email    | Formato de email válido |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+O botão **Enviar** só é habilitado quando todos os campos são válidos.
+A validação também é refeita no servidor antes de gravar na planilha.

@@ -1,26 +1,47 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-title: var(--font-figtree);
+  --font-subtitle: var(--font-figtree);
+  --font-body: var(--font-montserrat);
+
+  --color-ink: #1b2430;
+  --color-ink-soft: #4b5563;
+  --color-accent: #2ec25a;
+  --color-accent-hover: #28ad50;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-ink);
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  min-height: 100dvh;
+}
+
+/* Camada de fundo fixa via pseudo-elemento — evita o bug do
+   `background-attachment: fixed` no iOS Safari e mantém o gradiente
+   cobrindo a viewport mesmo com o conteúdo rolando. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    url("/assets/background.png") center / cover no-repeat,
+    linear-gradient(130deg, #e7dcef 0%, #dfe7f6 64%, #cfe0f5 100%);
+}
+
+/* Esconde a label flutuante e mostra o placeholder quando o campo está vazio.
+   Quando há conteúdo (ou foco), a label sobe e o placeholder some. */
+.field-input::placeholder {
+  color: #9ca3af;
+  opacity: 1;
 }
