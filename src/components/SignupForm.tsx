@@ -104,7 +104,7 @@ export function SignupForm() {
         />
 
         <Field
-          label="Email"
+          label="Email Corporativo"
           type="email"
           inputMode="email"
           autoComplete="email"
