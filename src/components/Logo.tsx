@@ -6,7 +6,7 @@ export function Logo() {
       alt="Magie"
       width={132}
       height={34}
-      className="h-[34px] w-auto"
+      className="h-[34px] w-auto lg:h-[39px]"
     />
   );
 }

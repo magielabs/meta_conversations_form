@@ -57,12 +57,12 @@ export function SignupForm() {
         <Logo />
       </div>
       <header className="text-center">
-        <h1 className="font-title text-[23px] font-bold leading-[1.18] tracking-tight text-ink">
+        <h1 className="font-title text-[23px] font-bold leading-[1.18] tracking-tight text-ink lg:text-[27px]">
           Receba a cobertura
           <br />
           do Conversations no seu WhatsApp
         </h1>
-        <p className="mx-auto mt-3 max-w-[330px] font-subtitle text-[14px] leading-snug text-ink-soft">
+        <p className="mx-auto mt-3 max-w-[330px] font-subtitle text-[14px] leading-snug text-ink-soft lg:mt-4 lg:max-w-[370px] lg:text-[15.5px]">
           O time da <strong className="font-semibold text-ink">Magie</strong>{" "}
           acompanha o evento por você e te manda os principais anúncios em
           primeira mão.
@@ -72,7 +72,7 @@ export function SignupForm() {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="mt-7 flex flex-col gap-4"
+        className="mt-7 flex flex-col gap-4 lg:mt-8 lg:gap-[18px]"
       >
         <Field
           label="Nome"
@@ -124,7 +124,7 @@ export function SignupForm() {
           type="submit"
           disabled={!isValid || isSubmitting}
           className={[
-            "mt-1 h-[46px] w-full rounded-xl font-body text-[15px] font-medium transition-colors",
+            "mt-1 h-[46px] w-full rounded-xl font-body text-[15px] font-medium transition-colors lg:h-[50px] lg:text-[16px]",
             isValid && !isSubmitting
               ? "cursor-pointer bg-accent text-white hover:bg-accent-hover"
               : "cursor-not-allowed bg-[#e8eaed] text-[#9aa0a6]",
@@ -146,12 +146,12 @@ function Confirmation() {
         alt="Confirmado"
         width={56}
         height={56}
-        className="h-14 w-14"
+        className="animate-check-pop h-14 w-14 lg:h-[68px] lg:w-[68px]"
       />
-      <h2 className="mt-5 font-title text-[26px] font-bold text-ink">
+      <h2 className="animate-fade-rise anim-delay-1 mt-5 font-title text-[26px] font-bold text-ink lg:text-[31px]">
         Inscrição confirmada
       </h2>
-      <p className="mx-auto mt-3 max-w-[360px] font-subtitle text-[14px] leading-relaxed text-ink-soft">
+      <p className="animate-fade-rise anim-delay-2 mx-auto mt-3 max-w-[360px] font-subtitle text-[14px] leading-relaxed text-ink-soft lg:max-w-[400px] lg:text-[15.5px]">
         Nosso time vai cobrir o evento de{" "}
         <strong className="font-semibold text-ink">3 de junho</strong> e enviar
         os destaques no WhatsApp logo depois. Não precisa gastar horas

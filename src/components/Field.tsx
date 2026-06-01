@@ -20,7 +20,7 @@ export const Field = forwardRef<HTMLInputElement, FieldProps>(function Field(
           placeholder=" "
           aria-invalid={error ? "true" : "false"}
           className={[
-            "field-input peer w-full rounded-xl border bg-white px-4 pt-5 pb-2 text-[16px] text-ink",
+            "field-input peer w-full rounded-xl border bg-white px-4 pt-5 pb-2 text-[16px] text-ink lg:pt-[22px] lg:pb-2.5 lg:text-[17px]",
             "shadow-[0_1px_2px_rgba(16,24,40,0.05)] outline-none transition-colors",
             "focus:ring-2 focus:ring-black/5",
             error
@@ -33,7 +33,7 @@ export const Field = forwardRef<HTMLInputElement, FieldProps>(function Field(
         <label
           htmlFor={inputId}
           className={[
-            "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-body text-[16px] text-gray-400 transition-all",
+            "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-body text-[16px] text-gray-400 transition-all lg:text-[17px]",
             "peer-focus:top-[9px] peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-gray-500",
             "peer-[:not(:placeholder-shown)]:top-[9px] peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500",
           ].join(" ")}

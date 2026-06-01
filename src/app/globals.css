@@ -45,3 +45,53 @@ body::before {
   color: #9ca3af;
   opacity: 1;
 }
+
+/* ── Animações da tela de confirmação ───────────────────────────── */
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes check-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-rise {
+  animation: fade-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-check-pop {
+  animation: check-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Atraso escalonado para um efeito mais suave */
+.anim-delay-1 {
+  animation-delay: 0.12s;
+}
+.anim-delay-2 {
+  animation-delay: 0.24s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-rise,
+  .animate-check-pop {
+    animation: none;
+  }
+}
