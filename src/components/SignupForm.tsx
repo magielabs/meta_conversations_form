@@ -57,10 +57,8 @@ export function SignupForm() {
         <Logo />
       </div>
       <header className="text-center">
-        <h1 className="font-title text-[23px] font-bold leading-[1.18] tracking-tight text-ink lg:text-[27px]">
-          Receba a cobertura
-          <br />
-          do Conversations no seu WhatsApp
+        <h1 className="font-title text-[23px] font-bold leading-[1.18] tracking-tight text-balance text-ink lg:text-[27px]">
+          Receba a cobertura do maior evento do ano da Meta no seu WhatsApp
         </h1>
         <p className="mx-auto mt-3 max-w-[330px] font-subtitle text-[14px] leading-snug text-ink-soft lg:mt-4 lg:max-w-[370px] lg:text-[15.5px]">
           O time da <strong className="font-semibold text-ink">Magie</strong>{" "}
